@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class GradeEvaluator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int total = 0;
+
+        System.out.print("How many subjects do you have? ");
+        int subjects = scanner.nextInt();
+
+        int[] scores = new int[subjects];
+
+        for (int i = 0; i < subjects; i++) {
+            System.out.print("Score for Subject " + (i + 1) + ": ");
+            scores[i] = scanner.nextInt();
+            total += scores[i];
+        }
+
+        double percentage = total / (double) subjects;
+        String finalGrade = calculateGrade(percentage);
+
+        System.out.println("\n--- Summary ---");
+        System.out.println("Sum of Marks: " + total);
+        System.out.printf("Percentage: %.2f%%\n", percentage);
+        System.out.println("Final Grade: " + finalGrade);
+
+        scanner.close();
+    }
+    
+    public static String calculateGrade(double percent) {
+        if (percent >= 90) {
+            return "A";
+        } else if (percent >= 80) {
+            return "B";
+        } else if (percent >= 70) {
+            return "C";
+        } else if (percent >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+}

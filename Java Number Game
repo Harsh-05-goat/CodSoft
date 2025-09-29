@@ -1,0 +1,60 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGame {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Random rand = new Random();
+
+        int totalScore = 0;
+        int round = 1;
+        boolean playAgain;
+
+        System.out.println("Welcome to the Number Guessing Game!");
+
+        do {
+            int number = rand.nextInt(100) + 1;
+            int attempts = 7;
+            boolean guessed = false;
+
+            System.out.println("\nRound " + round + ": Guess a number between 1 and 100.");
+
+            while (attempts > 0) {
+                System.out.print("Your guess: ");
+                int guess = input.nextInt();
+                attempts--;
+
+                if (guess == number) {
+                    System.out.println("Correct! You guessed the number.");
+                    int score = attempts + 1;
+                    totalScore += score;
+                    System.out.println("Score this round: " + score);
+                    guessed = true;
+                    break;
+                } else if (guess < number) {
+                    System.out.println("Too low.");
+                } else {
+                    System.out.println("Too high.");
+                }
+
+                if (attempts > 0) {
+                    System.out.println("Attempts left: " + attempts);
+                }
+            }
+
+            if (!guessed) {
+                System.out.println("Out of attempts! The number was: " + number);
+            }
+
+            System.out.println("Total score: " + totalScore);
+            System.out.print("Play again? (yes/no): ");
+            String response = input.next().toLowerCase();
+            playAgain = response.equals("yes");
+            round++;
+
+        } while (playAgain);
+
+        System.out.println("Thanks for playing! Final score: " + totalScore);
+        input.close();
+    }
+}
